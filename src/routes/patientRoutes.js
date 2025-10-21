@@ -3,7 +3,6 @@ const router = require("express").Router();
 const patientController = require("../controllers/patient.controllers");
 
 // const Patient = require("../models/Patient.models");
-
 // // ✅ Create a new patient
 // router.post("/", async (req, res) => {
 //   try {
@@ -13,7 +12,6 @@ const patientController = require("../controllers/patient.controllers");
 //     res.status(400).json({ error: err.message });
 //   }
 // });
-
 // // 📋 Get all patients
 // router.get("/", async (req, res) => {
 //   const patients = await Patient.find();
