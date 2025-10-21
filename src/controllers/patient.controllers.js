@@ -1,4 +1,30 @@
-const Patient = require("../models/Patient.models") ;
+const Patient = require("../models/Patient.models");
+
+// Get All Patients
+exports.getPatients = async (req, res) => {
+   try {
+    const page = parseInt(req.query.page) || 1;     // current page
+    const limit = parseInt(req.query.limit) || 10;  // per page
+    const skip = (page - 1) * limit;                // docs to skip
+
+    const patients = await Patient.find()
+      .lean()
+      .skip(skip)
+      .limit(limit)
+      // .sort({ createdAt: -1 }); // optional: newest first
+
+    const total = await Patient.countDocuments(); // total number of patients
+
+    res.status(200).json({
+      currentPage: page,
+      totalPages: Math.ceil(total / limit),
+      totalPatients: total,
+      data: patients,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 // Create Patient
 exports.createPatient = async (req, res) => {
@@ -10,18 +36,12 @@ exports.createPatient = async (req, res) => {
   }
 };
 
-// Get All Patients
-exports.getPatients = async (req, res) => {
-  const patients = await Patient.find();
-  res.json(patients);
-};
-
 // Get Single Patient
 exports.getPatientById = async (req, res) => {
   try {
     const patient = await Patient.findById(req.params.id);
     if (!patient) return res.status(404).json({ message: "Patient not found" });
-    res.json(patient);
+    res.status(200).json(patient);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
