@@ -1,26 +1,29 @@
 const Patient = require("../models/Patient.models");
-
+const { paginate }  = require('../../helper/paginate')
 // Get All Patients
 exports.getPatients = async (req, res) => {
    try {
-    const page = parseInt(req.query.page) || 1;     // current page
-    const limit = parseInt(req.query.limit) || 10;  // per page
-    const skip = (page - 1) * limit;                // docs to skip
+    // const page = parseInt(req.query.page) || 1;     // current page
+    // const limit = parseInt(req.query.limit) || 10;  // per page
+    // const skip = (page - 1) * limit;                // docs to skip
 
-    const patients = await Patient.find()
-      .lean()
-      .skip(skip)
-      .limit(limit)
+    // const patients = await Patient.find()
+    //   .lean()
+    //   .skip(skip)
+    //   .limit(limit)
       // .sort({ createdAt: -1 }); // optional: newest first
 
-    const total = await Patient.countDocuments(); // total number of patients
+    // const total = await Patient.countDocuments(); // total number of patients
+    const data = await paginate(req, Patient)
 
-    res.status(200).json({
-      currentPage: page,
-      totalPages: Math.ceil(total / limit),
-      totalPatients: total,
-      data: patients,
-    });
+    res.status(200).json({data})
+
+    // res.status(200).json({
+    //   currentPage: page,
+    //   totalPages: Math.ceil(total / limit),
+    //   totalPatients: total,
+    //   data: patients,
+    // });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
