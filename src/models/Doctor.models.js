@@ -7,6 +7,10 @@ const doctorSchema = new mongoose.Schema(
     phone: String,
     email: String,
     department: { type: mongoose.Schema.Types.ObjectId, ref: "Department" },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    }
   },
   { timestamps: true }
 );
