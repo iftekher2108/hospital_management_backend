@@ -29,10 +29,19 @@ exports.paginate = async (req, model, populateOptions=null) => {
 
     const results = await query;
     const total = await model.countDocuments();
+
+    // If lean() was used, results are plain objects and schema-level toJSON
+    // transforms (our global plugin) won't run. Re-hydrate each result into
+    // a mongoose document and call toJSON() so the plugin transform is applied
+    // while still benefiting from the query performance of lean().
+    const data = Array.isArray(results)
+        ? results.map(r => model.hydrate(r).toJSON())
+        : (results ? model.hydrate(results).toJSON() : results);
+
     return {
         page,
         limit,
         total,
-        data: results
+        data
     }
 };

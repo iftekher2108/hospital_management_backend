@@ -12,7 +12,7 @@ exports.createDoctor = async (req, res) => {
 
 exports.getDoctors = async (req, res) => {
 //   const doctors = await Doctor.find().populate("department");
-  const data = await paginate(req, Doctor,['department'])
+  const data = await paginate(req, Doctor,['department','user'])
   res.json({data});
 };
 

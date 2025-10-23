@@ -5,6 +5,8 @@ const paymentSchema = new mongoose.Schema({
   amountPaid: Number,
   paymentDate: { type: Date, default: Date.now },
   method: { type: String, enum: ["Cash", "Card", "Bkash", "Nagad", "Rocket"] },
+},{
+  timestamps: true
 });
 
 module.exports = mongoose.model("Payment", paymentSchema);

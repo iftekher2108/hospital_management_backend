@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const toJSONPlugin = require("../plugins/toJSON.plugin")
 
 const patientSchema = new mongoose.Schema(
   {
@@ -8,6 +9,11 @@ const patientSchema = new mongoose.Schema(
     phone: String,
     email: String,
     address: String,
+    guardian:{
+      name: String,
+      phone: String,
+      relationship: String,
+    },
     user:{
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -15,5 +21,7 @@ const patientSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+patientSchema.plugin(toJSONPlugin);
 
 module.exports = mongoose.model("Patient", patientSchema);

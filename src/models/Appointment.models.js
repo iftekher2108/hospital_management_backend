@@ -23,4 +23,6 @@ const appointmentSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// Note: toJSON transform is applied globally via src/plugins/toJSON.plugin.js
+
 module.exports = mongoose.model("Appointment", appointmentSchema);
