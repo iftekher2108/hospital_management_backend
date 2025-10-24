@@ -3,7 +3,7 @@ const toJSONPlugin = require("../plugins/toJSON.plugin");
 
 const appointmentSchema = new mongoose.Schema(
   {
-    // 🔹 Relations
+    // Relations
     patient: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Patient",
@@ -26,7 +26,7 @@ const appointmentSchema = new mongoose.Schema(
     //   ref: "Hospital",
     // },
 
-    // 🔹 Appointment Details
+    // Appointment Details
     appointmentDate: { type: Date, required: true },
     appointmentTime: { type: String }, // e.g. "10:30 AM"
     reason: { type: String },
@@ -44,7 +44,7 @@ const appointmentSchema = new mongoose.Schema(
     tokenNumber: { type: Number }, // if hospital uses token system
     roomNumber: { type: String },
 
-    // 🔹 Status
+    // Status
     status: {
       type: String,
       enum: ["Scheduled", "Ongoing", "Completed", "Cancelled", "No-show"],
@@ -53,7 +53,7 @@ const appointmentSchema = new mongoose.Schema(
     cancellationReason: { type: String },
     completedAt: { type: Date },
 
-    // 🔹 Payment Info
+    // Payment Info
     paymentStatus: {
       type: String,
       enum: ["Pending", "Paid", "Refunded"],
@@ -66,7 +66,7 @@ const appointmentSchema = new mongoose.Schema(
     },
     consultationFee: { type: Number, default: 0 },
 
-    // 🔹 Notes / Attachments
+    // Notes / Attachments
     doctorNotes: { type: String },
     patientNotes: { type: String },
     prescription: {
@@ -74,7 +74,7 @@ const appointmentSchema = new mongoose.Schema(
       ref: "Prescription",
     },
 
-    // 🔹 Soft Delete
+    // Soft Delete
     // deletedAt: { type: Date, default: null },
   },
   { timestamps: true }

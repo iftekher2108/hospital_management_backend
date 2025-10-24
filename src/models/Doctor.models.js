@@ -24,13 +24,13 @@ const doctorSchema = new mongoose.Schema(
     profileImage: { type: String }, // URL or file path
     certificates: [{ type: String }],
 
-    // 🔹 Hospital / Clinic Info
+    // Hospital / Clinic Info
     chamberName: { type: String },
     chamberAddress: { type: String },
     visitingHours: { type: String }, // e.g., "10 AM - 2 PM"
     consultationFee: { type: Number, default: 0 },
 
-    // 🔹 Availability
+    // Availability
     availableDays: [
       {
         day: {
@@ -50,12 +50,12 @@ const doctorSchema = new mongoose.Schema(
       },
     ],
 
-    // 🔹 Ratings & Status
+    // Ratings & Status
     rating: { type: Number, min: 0, max: 5, default: 0 },
     // totalReviews: { type: Number, default: 0 },
     isActive: { type: Boolean, default: true },
 
-    // // 🔹 Soft Delete (optional)
+    // // Soft Delete (optional)
     // isDeleted: { type: Boolean, default: false },
     // deletedAt: { type: Date, default: null },
   },

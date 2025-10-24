@@ -3,7 +3,7 @@ const toJSONPlugin = require("../plugins/toJSON.plugin")
 
 const patientSchema = new mongoose.Schema(
   {
-    // 🔹 Basic Info
+    // Basic Info
     name: { type: String, required: true, trim: true },
     gender: { type: String, enum: ["Male", "Female", "Other"], required: true },
     dob: { type: Date },
@@ -11,14 +11,14 @@ const patientSchema = new mongoose.Schema(
     bloodGroup: { type: String, enum: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"] },
     maritalStatus: { type: String, enum: ["Single", "Married", "Divorced", "Widowed"] },
 
-    // 🔹 Contact Info
+    // Contact Info
     phone: { type: String, required: true, trim: true },
     email: { type: String, trim: true },
     address: { type: String },
     city: { type: String },
     country: { type: String },
 
-    // 🔹 Guardian / Emergency Contact
+    // Guardian / Emergency Contact
     guardian: {
       name: String,
       phone: String,
@@ -30,7 +30,7 @@ const patientSchema = new mongoose.Schema(
       relationship: String,
     },
 
-    // 🔹 Medical Info
+    // Medical Info
     allergies: [{ type: String }],
     currentMedications: [{ type: String }],
     chronicDiseases: [{ type: String }],
@@ -40,7 +40,7 @@ const patientSchema = new mongoose.Schema(
     height: { type: Number },
     temperature: { type: Number },
 
-    // // 🔹 Hospital Info
+    // // Hospital Info
     // hospital: {
     //   type: mongoose.Schema.Types.ObjectId,
     //   ref: "Hospital",
