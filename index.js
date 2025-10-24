@@ -1,4 +1,4 @@
-require("dotenv").config();
+const { PORT } = require("./config/app")
 const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
@@ -9,7 +9,6 @@ const patientRoutes = require("./src/routes/patient.routes");
 const doctorRoutes = require("./src/routes/doctor.routes");
 const appointmentRoutes = require("./src/routes/appointment.routes");
 const departmentRoutes = require("./src/routes/department.routes");
-const port = process.env.PORT || 3000;
 connectDB();
 app.use(cors());
 app.use(helmet());
@@ -28,6 +27,6 @@ app.get("/", (req, res) => {
   res.json({ msg: "Hospital management system api is running" });
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+app.listen(PORT || 3000, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

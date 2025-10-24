@@ -1,7 +1,8 @@
 const mongoose = require("mongoose")
+const { MONGODB_URI } = require('./app')
 const toJSONPlugin = require("../src/plugins/toJSON.plugin")
 
-const dbURI = process.env.MONGODB_URI || "mongodb://localhost:27017/hospital_management"
+const dbURI = MONGODB_URI || "mongodb://localhost:27017/hospital_management"
 
 // register global plugins before connecting / creating models
 mongoose.plugin(toJSONPlugin)
