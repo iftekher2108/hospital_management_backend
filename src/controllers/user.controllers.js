@@ -14,7 +14,11 @@ exports.getUsers = async (req, res) => {
 
 exports.createUser = async (req, res) => {
     try{
-        const user = await User.create(req.body)
+        userData = {...req.body};
+        if(req.files['picture']) {
+            userData.picture = req.files['picture'][0].filename;
+        }
+        const user = await User.create(userData)
        return res.status(201).json({user})
     } catch (error) {
        return res.status(400).json({message: error.message})
