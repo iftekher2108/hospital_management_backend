@@ -64,8 +64,9 @@ src/
 
 ### 1️⃣ Clone this Repository
 ```bash
-git clone https://github.com/yourusername/hospital-management-api.git
-cd hospital-management-api
+git clone https://github.com/iftekher2108/hospital_management_backend.git
+cd hospital_management_backend
+
 ```
 
 ### 2️⃣ Install Dependencies
@@ -208,7 +209,7 @@ It’s a **backend foundation** that you can connect to any frontend — like a 
 ## 👨‍💻 Author
 
 **Iftekher**  
-🌐 [Portfolio](https://iftekher2108.github.io/iftekher-portfolio)  
+🌐 [Portfolio](https://iftekher-mahmud.vercel.app/)  
 🐙 [GitHub](https://github.com/iftekher2108)  
 💼 Passionate Full-Stack Developer & System Architect
 
