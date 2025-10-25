@@ -2,6 +2,7 @@ const { PORT } = require("./config/app")
 const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
+const { rateLimit } = require('express-rate-limit')
 const app = express();
 const connectDB = require("./config/db");
 const userRoutes = require('./src/routes/user.routes')
@@ -17,7 +18,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // app.use(express.static('public'))
 
-app.use("/api/users",userRoutes)
+// const limiter = rateLimit({
+//   windowMs: 10 * 60 * 1000, // 15 minutes
+//   max: 100, // প্রতি 15 মিনিটে 200 টা রিকোয়েস্ট allowed
+//   message: "Too many requests from this IP, please try again later 🕒",
+// })
+// app.use('/api',limiter);
+
+app.use("/api/users", userRoutes)
 app.use("/api/patients", patientRoutes);
 app.use("/api/doctors", doctorRoutes);
 app.use("/api/appointments", appointmentRoutes);
