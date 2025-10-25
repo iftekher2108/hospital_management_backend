@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const toJSONPlugin = require("../plugins/toJSON.plugin");
+const paginatePlugin = require("../plugins/paginate.plugin");
 
 const departmentSchema = new mongoose.Schema(
   {
@@ -25,6 +27,9 @@ const departmentSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+departmentSchema.plugin(toJSONPlugin)
+departmentSchema.plugin(paginatePlugin)
 
 // Optional index for faster search
 departmentSchema.index({ name: 1, code: 1 });

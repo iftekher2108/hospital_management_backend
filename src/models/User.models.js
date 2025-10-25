@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const toJSONPlugin = require('../plugins/toJSON.plugin');
+const paginatePlugin = require('../plugins/paginate.plugin');
 const userSchema = new mongoose.Schema(
   {
     // Basic Info
@@ -36,6 +38,9 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+
+
+
 // Indexes
 userSchema.index({ email: 1 }, { unique: true });
 userSchema.index({ role: 1 });
@@ -55,13 +60,17 @@ userSchema.index({ isActive: 1 });
 // };
 
 // Hide sensitive fields in JSON response
-userSchema.methods.toJSON = function () {
-  const obj = this.toObject();
-  delete obj.password;
-  // delete obj.verificationToken;
-  // delete obj.resetPasswordToken;
-  // delete obj.resetPasswordExpires;
-  return obj;
-};
+// userSchema.methods.toJSON = function () {
+//   const obj = this.toObject();
+//   delete obj.password;
+//   delete obj.verificationToken;
+//   delete obj.resetPasswordToken;
+//   delete obj.resetPasswordExpires;
+//   return obj;
+// };
+
+// plugins
+userSchema.plugin(toJSONPlugin)
+userSchema.plugin(paginatePlugin)
 
 module.exports = mongoose.model("User", userSchema);

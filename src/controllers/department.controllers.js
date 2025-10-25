@@ -1,9 +1,9 @@
 const Department = require("../models/Department.models")
-const { paginate } = require('../../helper/paginate')
 
 exports.getDepartments = async (req, res) => {
     try {
-        const data = await paginate(req, Department);
+        
+        const data = await Department.paginate({page:req.query.page || 1});
         res.status(200).json({data});
     } catch (error) {
         return res.status(500).json({ message: error.message })

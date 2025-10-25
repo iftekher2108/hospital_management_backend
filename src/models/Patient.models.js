@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const toJSONPlugin = require("../plugins/toJSON.plugin")
+const paginatePlugin = require('../plugins/paginate.plugin')
 
 const patientSchema = new mongoose.Schema(
   {
@@ -61,7 +62,7 @@ const patientSchema = new mongoose.Schema(
     dischargeDate: { type: Date },
     roomNumber: { type: String },
 
-    // 🔹 Insurance Info
+    // Insurance Info
     insurance: {
       provider: String,
       policyNumber: String,
@@ -69,7 +70,7 @@ const patientSchema = new mongoose.Schema(
       expiryDate: Date,
     },
 
-    // 🔹 User relation
+    // User relation
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -82,6 +83,7 @@ const patientSchema = new mongoose.Schema(
 );
 
 patientSchema.plugin(toJSONPlugin);
+patientSchema.plugin(paginatePlugin);
 
 patientSchema.index({ name: 1 }); // Sort/search by patient name
 patientSchema.index({ phone: 1 }, { unique: true }); // Prevent duplicate phone

@@ -1,5 +1,4 @@
 const Doctor = require("../models/Doctor.models");
-const { paginate } = require("../../helper/paginate");
 
 exports.createDoctor = async (req, res) => {
   try {
@@ -12,7 +11,7 @@ exports.createDoctor = async (req, res) => {
 
 exports.getDoctors = async (req, res) => {
 //   const doctors = await Doctor.find().populate("department");
-  const data = await paginate(req, Doctor,['department','user'])
+  const data = await Doctor.paginate({page: req.query.page || 1,populate:['department','user']})
   res.json({data});
 };
 
@@ -20,7 +19,7 @@ exports.getDoctorById = async (req, res) => {
     try {
         const doctor = await Doctor.findById(req.params.id).populate('department');
         if(!doctor) {
-            return res.status(404).json({message: "doctor not found"})
+            return res.status(404).json({message: "Doctor not found"})
         }
         res.status(200).json({doctor})
     } catch (error) {
@@ -44,9 +43,9 @@ exports.deleteDoctor = async (req, res) => {
     try {
         const doctor = await Doctor.findByIdAndDelete(req.params.id);
         if(!doctor) {
-            return res.status(404).json({message: "doctor not found"});
+            return res.status(404).json({message: "Doctor not found"});
         }
-        res.status(200).json({message:"doctor deleted successfully"});
+        res.status(200).json({message:"Doctor deleted successfully"});
     } catch (error) {
         res.status(400).json({message:error.message})
     }

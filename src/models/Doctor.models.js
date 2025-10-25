@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const toJSONPlugin = require("../plugins/toJSON.plugin");
+const paginatePlugin = require("../plugins/paginate.plugin");
 const doctorSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
@@ -63,5 +64,6 @@ const doctorSchema = new mongoose.Schema(
 );
 
 doctorSchema.plugin(toJSONPlugin);
+doctorSchema.plugin(paginatePlugin);
 
 module.exports = mongoose.model("Doctor", doctorSchema);

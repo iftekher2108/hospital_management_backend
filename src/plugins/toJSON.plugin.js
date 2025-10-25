@@ -28,6 +28,12 @@ module.exports = function toJSONPlugin(schema) {
         delete ret._id;
       }
 
+      // your user-specific logic
+      delete ret.password;
+      delete ret.verificationToken;
+      delete ret.resetPasswordToken;
+      delete ret.resetPasswordExpires;
+
       // 🪄 Move id to the first position
       if (ret.id !== undefined) {
         // Reorder keys: id first, then others

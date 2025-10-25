@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const toJSONPlugin = require("../plugins/toJSON.plugin");
+const paginatePlugin = require('../plugins/paginate.plugin')
 
 const appointmentSchema = new mongoose.Schema(
   {
@@ -81,7 +82,8 @@ const appointmentSchema = new mongoose.Schema(
 );
 
 appointmentSchema.plugin(toJSONPlugin)
-// 🔹 Indexes for faster query
+appointmentSchema.plugin(paginatePlugin)
+// Indexes for faster query
 appointmentSchema.index({ patient: 1 });
 appointmentSchema.index({ doctor: 1 });
 appointmentSchema.index({ appointmentDate: 1 });

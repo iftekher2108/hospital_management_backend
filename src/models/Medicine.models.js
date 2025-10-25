@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const toJSONPlugin = require("../plugins/toJSON.plugin");
+const paginatePlugin = require("../plugins/paginate.plugin");
 
 const medicineSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -35,6 +36,7 @@ const medicineSchema = new mongoose.Schema({
 });
 
 medicineSchema.plugin(toJSONPlugin);
+medicineSchema.plugin(paginatePlugin)
 
 medicineSchema.index({ name: 1, genericName: 1, manufacturer: 1 });
 

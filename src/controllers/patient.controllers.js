@@ -1,5 +1,4 @@
 const Patient = require("../models/Patient.models");
-const { paginate }  = require('../../helper/paginate')
 
 // const page = parseInt(req.query.page) || 1;     // current page
     // const limit = parseInt(req.query.limit) || 10;  // per page
@@ -24,7 +23,7 @@ const { paginate }  = require('../../helper/paginate')
 exports.getPatients = async (req, res) => {
    try {
  
-    const data = await paginate(req, Patient)
+    const data = await Patient.paginate({page:req.query.page || 1})
 
     res.status(200).json({data})
 
@@ -58,6 +57,9 @@ exports.getPatientById = async (req, res) => {
 exports.updatePatient = async (req, res) => {
   try {
     const patient = await Patient.findByIdAndUpdate(req.params.id, req.body, { new: true });
+     if (!patient) {
+      return res.status(404).json({ message: "Patient not found" });
+    }
     res.json(patient);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -68,7 +70,7 @@ exports.updatePatient = async (req, res) => {
 exports.deletePatient = async (req, res) => {
   try {
     await Patient.findByIdAndDelete(req.params.id);
-    res.json({ message: "Patient deleted" });
+    res.json({ message: "Patient deleted successfully" });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

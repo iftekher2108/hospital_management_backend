@@ -1,4 +1,3 @@
-const { paginate } = require("../../helper/paginate");
 const Appointment = require("../models/Appointment.models");
 
 exports.createAppointment = async (req, res) => {
@@ -11,7 +10,7 @@ exports.createAppointment = async (req, res) => {
 };
 
 exports.getAppointments = async (req, res) => {
-  const appointments = await paginate(req, Appointment,['patient', 'doctor']) 
+  const appointments = await Appointment.paginate({page:req.query.page || 1,populate:['patient','doctor']})
     // .populate("patient", "name phone")
     // .populate("doctor", "name specialization");
   res.json({ appointments });

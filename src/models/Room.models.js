@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const toJSONPlugin = require("../plugins/toJSON.plugin");
+const paginatePlugin = require('../plugins/paginate.plugin')
 
 const roomSchema = new mongoose.Schema(
   {
@@ -60,6 +61,7 @@ const roomSchema = new mongoose.Schema(
 );
 
 roomSchema.plugin(toJSONPlugin)
+roomSchema.plugin(paginatePlugin)
 // Indexes for faster searching
 roomSchema.index({ roomNumber: 1 }, { unique: true });
 roomSchema.index({ roomType: 1 });
