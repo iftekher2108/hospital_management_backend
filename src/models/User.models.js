@@ -6,13 +6,13 @@ const userSchema = new mongoose.Schema(
   {
     // Basic Info
     name: { type: String, required: true, trim: true },
-    username: { type: String, unique: true, sparse: true },
+    username: { type: String, required:true, unique: true, sparse: true },
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
     phone: { type: String, trim: true },
     picture: { type: String },
     
     // Authentication
-    password: { type: String, required: true, minlength: 6 },
+    password: { type: String, required: true, minlength: 8 },
     // emailVerified: { type: Boolean, default: false },
     // verificationToken: { type: String },
     // resetPasswordToken: { type: String },

@@ -5,7 +5,9 @@ const cors = require("cors");
 const { rateLimit } = require('express-rate-limit')
 const app = express();
 const connectDB = require("./config/db");
+const authenticate = require('./src/middlewares/authenticate.middlewares')
 const userRoutes = require('./src/routes/user.routes')
+const authRoute = require('./src/controllers/auth/auth.controllers')
 const patientRoutes = require("./src/routes/patient.routes");
 const doctorRoutes = require("./src/routes/doctor.routes");
 const appointmentRoutes = require("./src/routes/appointment.routes");
@@ -16,17 +18,18 @@ app.use(cors());
 app.use(helmet());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// app.use(express.static('public'))
 
+// app.use(express.static('public'))
 // const limiter = rateLimit({
-//   windowMs: 10 * 60 * 1000, // 15 minutes
-//   max: 100, // প্রতি 15 মিনিটে 200 টা রিকোয়েস্ট allowed
+//   windowMs: 3 * 60 * 1000, // 15 minutes
+//   max: 50, // every 15 min 200 request allowed
 //   message: "Too many requests from this IP, please try again later 🕒",
 // })
 // app.use('/api',limiter);
 
-app.use("/api/users", userRoutes)
-app.use("/api/patients", patientRoutes);
+app.use("/api/auth", authRoute);
+app.use("/api/users", userRoutes);
+app.use("/api/patients",authenticate, patientRoutes);
 app.use("/api/doctors", doctorRoutes);
 app.use("/api/appointments", appointmentRoutes);
 app.use("/api/departments", departmentRoutes);
