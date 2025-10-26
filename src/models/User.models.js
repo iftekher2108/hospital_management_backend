@@ -1,16 +1,20 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
 const toJSONPlugin = require('../plugins/toJSON.plugin');
 const paginatePlugin = require('../plugins/paginate.plugin');
 const userSchema = new mongoose.Schema(
   {
     // Basic Info
     name: { type: String, required: true, trim: true },
-    username: { type: String, required:true, unique: true, sparse: true },
+    username: {
+      type: String,
+      unique: true,
+      required: true,
+      sparse: true
+    },
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
     phone: { type: String, trim: true },
     picture: { type: String },
-    
+
     // Authentication
     password: { type: String, required: true, minlength: 8 },
     // emailVerified: { type: Boolean, default: false },
@@ -24,7 +28,7 @@ const userSchema = new mongoose.Schema(
       enum: ["Admin", "Doctor", "Nurse", "Patient", "Receptionist", "Pharmacist", "Accountant"],
       default: "Patient",
     },
-    permissions: [{ type: String }], // optional granular permissions
+    // permissions: [{ type: String }], // optional granular permissions
 
     // Login / Activity Tracking
     // lastLogin: { type: Date },

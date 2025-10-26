@@ -1,7 +1,7 @@
 const User = require("../../models/User.models");
+const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET, JWT_EXPIRE } = require('../../../config/app')
-
 exports.register = async (req, res) => {
     try {
         const { name, username, email, password } = req.body;
@@ -18,24 +18,24 @@ exports.register = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         // Save user
-        const user = await User.create({ name, email, password: hashedPassword });
+        const user = await User.create({ name, username, email, password: hashedPassword });
 
         const token = jwt.sign({
-            id: user.id,
-            username: user.username,
+            id: user._id,
+            // username: user.username,
             email: user.email,
             role: user.role
         }, JWT_SECRET, { expiresIn: JWT_EXPIRE });
 
         res.status(200).json({
-            message: 'Login successful',
+            message: 'Register successful',
             user: { id: user.id, name: user.name, email: user.email },
             token,
         });
 
     } catch (error) {
         console.error('Register Error:', error.message);
-        res.status(500).json({ message: "Server error" + error.message })
+        res.status(500).json({ message: "Server error " + error.message })
     }
 }
 
@@ -57,19 +57,19 @@ exports.login = async (req, res) => {
 
         //  Generate Token
         const token = jwt.sign({
-            id: user.id,
-            username: user.username,
+            id: user._id,
+            // username: user.username,
             email: user.email,
             role: user.role
         }, JWT_SECRET, { expiresIn: JWT_EXPIRE });
 
         res.status(200).json({
             message: 'Login successful',
-            user: { id: user.id, username: username, name: user.name, email: user.email },
+            user: { id: user.id, name: user.name, email: user.email },
             token,
         });
     } catch (error) {
         console.error('Login Error:', error.message);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: 'Server error ' + error.message });
     }
 }

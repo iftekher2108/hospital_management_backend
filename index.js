@@ -7,7 +7,7 @@ const app = express();
 const connectDB = require("./config/db");
 const authenticate = require('./src/middlewares/authenticate.middlewares')
 const userRoutes = require('./src/routes/user.routes')
-const authRoute = require('./src/controllers/auth/auth.controllers')
+const authRoute = require('./src/routes/auth.route')
 const patientRoutes = require("./src/routes/patient.routes");
 const doctorRoutes = require("./src/routes/doctor.routes");
 const appointmentRoutes = require("./src/routes/appointment.routes");
@@ -28,12 +28,12 @@ app.use(express.json());
 // app.use('/api',limiter);
 
 app.use("/api/auth", authRoute);
-app.use("/api/users", userRoutes);
-app.use("/api/patients",authenticate, patientRoutes);
-app.use("/api/doctors", doctorRoutes);
-app.use("/api/appointments", appointmentRoutes);
-app.use("/api/departments", departmentRoutes);
-app.use("/api/rooms", roomRoutes);
+app.use("/api/users", authenticate, userRoutes);
+app.use("/api/patients", authenticate, patientRoutes);
+app.use("/api/doctors", authenticate, doctorRoutes);
+app.use("/api/appointments", authenticate, appointmentRoutes);
+app.use("/api/departments", authenticate, departmentRoutes);
+app.use("/api/rooms", authenticate, roomRoutes);
 
 app.get("/", (req, res) => {
   console.log("Hospital Management System API is running");

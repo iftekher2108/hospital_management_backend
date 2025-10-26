@@ -24,7 +24,6 @@ exports.getPatients = async (req, res) => {
    try {
  
     const data = await Patient.paginate({page:req.query.page || 1})
-
     res.status(200).json({data})
 
   } catch (error) {
