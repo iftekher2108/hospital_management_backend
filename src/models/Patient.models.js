@@ -21,6 +21,7 @@ const patientSchema = new mongoose.Schema(
 
     // Guardian / Emergency Contact
     guardian: {
+      picture: String,
       name: String,
       phone: String,
       relationship: String,
