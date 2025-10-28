@@ -1,7 +1,10 @@
 const Doctor = require("../models/Doctor.models");
+const User = require("../models/User.models");
 
 exports.createDoctor = async (req, res) => {
   try {
+    
+    const user = await User.create({ })
     const doctor = await Doctor.create(req.body);
     res.status(201).json({doctor});
   } catch (error) {
