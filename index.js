@@ -23,7 +23,7 @@ app.use(express.json());
 // const limiter = rateLimit({
 //   windowMs: 3 * 60 * 1000, // 15 minutes
 //   max: 50, // every 15 min 200 request allowed
-//   message: "Too many requests from this IP, please try again later 🕒",
+//   message: "Too many requests from this IP, please try again later",
 // })
 // app.use('/api',limiter);
 
