@@ -43,6 +43,22 @@ const userSchema = new mongoose.Schema(
 );
 
 
+userSchema.virtual("doctorInfo", {
+  ref: "Doctor",
+  localField: "_id",
+  foreignField: "user",
+  justOne: true,
+});
+
+userSchema.virtual("patientInfo", {
+  ref: "Patient",
+  localField: "_id",
+  foreignField: "user",
+  justOne: true,
+});
+
+userSchema.set("toObject", { virtuals: true });
+userSchema.set("toJSON", { virtuals: true });
 
 
 // Indexes
