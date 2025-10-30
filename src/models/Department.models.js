@@ -16,8 +16,8 @@ const departmentSchema = new mongoose.Schema(
       ref: "Doctor",
     },
 
-    contactEmail: { type: String },
-    contactPhone: { type: String },
+    email: { type: String },
+    phone: { type: String },
 
     totalStaff: { type: Number, default: 0 },
     totalBeds: { type: Number, default: 0 },
