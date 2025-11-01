@@ -38,7 +38,7 @@ const appointmentSchema = new mongoose.Schema(
     },
     mode: {
       type: String,
-      enum: ["Walk-in", "Pre-booked", "Follow-up"],
+      enum: ["walk-in", "pre-booked", "follow-up"],
       default: "Pre-booked",
     },
     duration: { type: Number, default: 30 }, // in minutes
