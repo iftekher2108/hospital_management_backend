@@ -2,10 +2,10 @@ const { PORT } = require("./config/app")
 const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
-const { rateLimit } = require('express-rate-limit')
 const app = express();
 const connectDB = require("./config/db");
 const authenticate = require('./src/middlewares/authenticate.middlewares')
+const { limiter } = require("./src/middlewares/rate-limit.middlewares");
 const userRoutes = require('./src/routes/user.routes')
 const authRoute = require('./src/routes/auth.route')
 const patientRoutes = require("./src/routes/patient.routes");
@@ -19,12 +19,8 @@ app.use(helmet());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// app.use(express.static('public'))
-// const limiter = rateLimit({
-//   windowMs: 3 * 60 * 1000, // 15 minutes
-//   max: 50, // every 15 min 200 request allowed
-//   message: "Too many requests from this IP, please try again later",
-// })
+// app.use(express.static('out'))
+
 // app.use('/api',limiter);
 
 app.use("/api/auth", authRoute);

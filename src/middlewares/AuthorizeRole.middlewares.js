@@ -5,7 +5,6 @@ module.exports = (...allowedRoles) => {
     if (!allowedRoles.includes(userRole)) {
       return res.status(403).json({ message: 'Access Denied: insufficient role' });
     }
-
     next();
   };
 };

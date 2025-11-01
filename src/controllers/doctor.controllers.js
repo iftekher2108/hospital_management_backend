@@ -3,53 +3,73 @@ const User = require("../models/User.models");
 
 exports.createDoctor = async (req, res) => {
   try {
-    
-    const user = await User.create({ })
+    const user = await User.create({});
     const doctor = await Doctor.create(req.body);
-    res.status(201).json({doctor});
+    res.status(201).json({ doctor });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
 
 exports.getDoctors = async (req, res) => {
-//   const doctors = await Doctor.find().populate("department");
-  const data = await Doctor.paginate({page: req.query.page || 1,populate:['department','user']})
-  res.json({data});
+  //   const doctors = await Doctor.find().populate("department");
+  const data = await Doctor.paginate({
+    page: req.query.page || 1,
+    populate: ["department", "user"],
+  });
+  res.json({ data });
 };
 
-exports.getDoctorById = async (req, res) => {
-    try {
-        const doctor = await Doctor.findById(req.params.id).populate('department');
-        if(!doctor) {
-            return res.status(404).json({message: "Doctor not found"})
-        }
-        res.status(200).json({doctor})
-    } catch (error) {
-        res.status(400).json({message: error.message})
-    }
-}
-
-exports.updateDoctor = async (req, res) => {
+exports.doctorStatusById = async (req, res) => {
   try {
-    const doctor = await Doctor.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const doctor = await Doctor.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
     if (!doctor) {
       return res.status(404).json({ message: "Doctor not found" });
     }
-    res.json({doctor});
+    res.status(200).json({ message: "Doctor Active Status Update Successfully" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+exports.getDoctorById = async (req, res) => {
+  try {
+    const doctor = await Doctor.findById(req.params.id).populate("department");
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor not found" });
+    }
+    res.status(200).json({ doctor });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+exports.updateDoctor = async (req, res) => {
+  try {
+    const doctor = await Doctor.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor not found" });
+    }
+    res.json({ doctor });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
 
 exports.deleteDoctor = async (req, res) => {
-    try {
-        const doctor = await Doctor.findByIdAndDelete(req.params.id);
-        if(!doctor) {
-            return res.status(404).json({message: "Doctor not found"});
-        }
-        res.status(200).json({message:"Doctor deleted successfully"});
-    } catch (error) {
-        res.status(400).json({message:error.message})
+  try {
+    const doctor = await Doctor.findByIdAndDelete(req.params.id);
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor not found" });
     }
-}
+    res.status(200).json({ message: "Doctor deleted successfully" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};

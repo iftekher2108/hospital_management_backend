@@ -6,7 +6,9 @@ const departmentSchema = new mongoose.Schema(
   {
     name: { type: String, required: true,  },
     code: { type: String, unique: true, uppercase: true }, // e.g. SURG, CARD, NEUR
-
+    picture: {
+       type: String
+    },
     description: String,
     floor: { type: String }, // e.g. "3rd Floor"
     roomNumber: { type: String }, // optional

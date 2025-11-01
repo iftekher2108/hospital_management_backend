@@ -10,10 +10,29 @@ exports.createAppointment = async (req, res) => {
 };
 
 exports.getAppointments = async (req, res) => {
-  const appointments = await Appointment.paginate({page:req.query.page || 1,populate:['patient','doctor']})
-    // .populate("patient", "name phone")
-    // .populate("doctor", "name specialization");
+  const appointments = await Appointment.paginate({
+    page: req.query.page || 1,
+    populate: ["patient", "doctor"],
+  });
+  // .populate("patient", "name phone")
+  // .populate("doctor", "name specialization");
   res.json({ appointments });
+};
+
+exports.appointmentStatusById = async (req, res) => {
+  try {
+    const appointment = await Appointment.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    if (!appointment) {
+      return res.status(404).json({ message: "Appointment not found" });
+    }
+    res.status(200).json({ message: "Appointment Status Update Successfully" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 };
 
 exports.getAppointmentById = async (req, res) => {
@@ -28,28 +47,32 @@ exports.getAppointmentById = async (req, res) => {
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
-}
+};
 
 exports.updateAppointment = async (req, res) => {
   try {
-    const appointment = await Appointment.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    const appointment = await Appointment.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
     if (!appointment) {
-      return res.status(404).json({ message: "Appointment not found" })
+      return res.status(404).json({ message: "Appointment not found" });
     }
-    res.status(200).json({ appointment })
+    res.status(200).json({ appointment });
   } catch (error) {
-    res.status(400).json({ message: error.message })
+    res.status(400).json({ message: error.message });
   }
-}
+};
 
 exports.deleteAppointment = async (req, res) => {
   try {
     const appointment = await Appointment.findByIdAndDelete(req.params.id);
     if (!appointment) {
-      return res.status(404).json({ message: "Appointment not found" })
+      return res.status(404).json({ message: "Appointment not found" });
     }
     res.status(200).json({ message: "Appointment deleted successfully" });
   } catch (error) {
-    res.status(400).json({message:error.message})
+    res.status(400).json({ message: error.message });
   }
-}
+};

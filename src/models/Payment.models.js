@@ -4,7 +4,10 @@ const paymentSchema = new mongoose.Schema({
   bill: { type: mongoose.Schema.Types.ObjectId, ref: "Bill" },
   amountPaid: Number,
   paymentDate: { type: Date, default: Date.now },
-  method: { type: String, enum: ["Cash", "Card", "Bkash", "Nagad", "Rocket"] },
+  method: { type: String, enum: ["cash", "card", "bkash", "nagad", "rocket"] },
+  picture: {
+    type: String,
+  }
 },{
   timestamps: true
 });

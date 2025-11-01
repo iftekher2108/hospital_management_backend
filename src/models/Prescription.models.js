@@ -61,7 +61,7 @@ const prescriptionSchema = new mongoose.Schema(
     issuedDate: { type: Date, default: Date.now },
     digitalSignature: { type: String }, // optional for doctor’s e-sign
 
-    // Status / Soft Delete
+    // Status
     status: {
       type: String,
       enum: ["active", "revised", "cancelled"],

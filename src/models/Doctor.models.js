@@ -4,14 +4,14 @@ const paginatePlugin = require("../plugins/paginate.plugin");
 const doctorSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    gender: { type: String, enum: ["Male", "Female", "Other"] },
+    gender: { type: String, enum: ["male", "female", "other"] },
     dateOfBirth: { type: Date },
 
     phone: String,
     email: String,
     address: { type: String },
     city: { type: String },
-    country: { type: String, default: "Bangladesh" },
+    country: { type: String, default: "bangladesh" },
 
     specialization: String,
     qualification: { type: String }, // e.g., MBBS, FCPS, MD, etc.
@@ -37,13 +37,13 @@ const doctorSchema = new mongoose.Schema(
         day: {
           type: String,
           enum: [
-            "Saturday",
-            "Sunday",
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
+            "saturday",
+            "sunday",
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
           ],
         },
         startTime: String,

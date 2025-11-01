@@ -48,8 +48,8 @@ const appointmentSchema = new mongoose.Schema(
     // Status
     status: {
       type: String,
-      enum: ["Scheduled", "Ongoing", "Completed", "Cancelled", "No-show"],
-      default: "Scheduled",
+      enum: ["scheduled", "ongoing", "completed", "cancelled", "no-show"],
+      default: "scheduled",
     },
     cancellationReason: { type: String },
     completedAt: { type: Date },
@@ -57,12 +57,12 @@ const appointmentSchema = new mongoose.Schema(
     // Payment Info
     paymentStatus: {
       type: String,
-      enum: ["Pending", "Paid", "Refunded"],
-      default: "Pending",
+      enum: ["pending", "paid", "refunded"],
+      default: "pending",
     },
     paymentMethod: {
       type: String,
-      enum: ["Cash", "Card", "Online", "Insurance"],
+      enum: ["cash", "card", "online", "insurance"],
       default: "Cash",
     },
     consultationFee: { type: Number, default: 0 },

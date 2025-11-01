@@ -14,7 +14,7 @@ const roomSchema = new mongoose.Schema(
     //  Type & Capacity
     roomType: {
       type: String,
-      enum: ["General", "ICU", "Private", "Semi-Private", "Emergency", "VIP"],
+      enum: ["general", "icu", "private", "semi-private", "emergency", "vip"],
       default: "General",
     },
     bedCount: { type: Number, default: 1 },
@@ -23,8 +23,8 @@ const roomSchema = new mongoose.Schema(
     //  Status
     status: {
       type: String,
-      enum: ["Available", "Occupied", "Maintenance"],
-      default: "Available",
+      enum: ["available", "occupied", "maintenance"],
+      default: "available",
     },
 
     //  Pricing / Billing

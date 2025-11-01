@@ -6,11 +6,11 @@ const patientSchema = new mongoose.Schema(
   {
     // Basic Info
     name: { type: String, required: true, trim: true },
-    gender: { type: String, enum: ["Male", "Female", "Other"], required: true },
+    gender: { type: String, enum: ["male", "female", "other"], required: true },
     dob: { type: Date },
     age: { type: Number }, // optional auto-calc
-    bloodGroup: { type: String, enum: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"] },
-    maritalStatus: { type: String, enum: ["Single", "Married", "Divorced", "Widowed"] },
+    bloodGroup: { type: String, enum: ["a+", "a-", "b+", "b-", "ab+", "ab-", "o+", "o-"] },
+    maritalStatus: { type: String, enum: ["single", "married", "divorced", "widowed"] },
 
     // Contact Info
     phone: { type: String, required: true, trim: true },

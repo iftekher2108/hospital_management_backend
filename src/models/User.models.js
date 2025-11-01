@@ -25,8 +25,8 @@ const userSchema = new mongoose.Schema(
     // Roles & Permissions
     role: {
       type: String,
-      enum: ["Admin", "Doctor", "Nurse", "Patient", "Receptionist", "Pharmacist", "Accountant"],
-      default: "Patient",
+      enum: ["admin", "doctor", "nurse", "patient", "receptionist", "pharmacist", "accountant"],
+      default: "patient",
     },
     // permissions: [{ type: String }], // optional granular permissions
 
