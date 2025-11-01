@@ -30,7 +30,7 @@ const patientStorage = multer.diskStorage({
           cb(null, upPath)  
         }
     },
-    filename: (req, file, cb) => cb(null, "patient-"+ Date.now() + path.extname(file.originalname)),
+    filename: (req, file, cb) => cb(null, "patient-" + Date.now() + path.extname(file.originalname)),
 })
 exports.patientUpload = multer({ storage:patientStorage })
 
